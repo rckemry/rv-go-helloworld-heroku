@@ -61,5 +61,3 @@ jobs:
 
       - store_test_results:
           path: /tmp/test-results
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
