@@ -1,5 +1,4 @@
-GOFILES = $(shell find . -name '*.go' -not -path './rv-go-helloworld-heroku/*')
-GOPACKAGES = $(shell go list ./...  | grep -v /rv-go-helloworld-heroku/)
+GOFILES = $(shell find . -name '*.go' -not -path 'main.go')
 
 default: build
 
@@ -17,4 +16,4 @@ workdir/contacts: $(GOFILES)
 test: test-all
 
 test-all:
-	@go test -v $(GOPACKAGES)
+	@go test -v main.go
