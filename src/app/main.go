@@ -7,11 +7,11 @@ import (
     "net/http"
 )
 
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, you")
+}
+
 func main() {
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello, you", )
-    })
-
+    http.HandleFunc("/", handler)
     log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), nil))
-
 }
