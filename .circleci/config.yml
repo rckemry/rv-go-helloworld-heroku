@@ -45,14 +45,6 @@ jobs:
 
       - run: make
 
-      - run:
-          name: Start service
-          environment:
-            CONTACTS_DB_URL: "postgres://root@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /go/src/github.com/rckemry/rv-go-helloworld-heroku/db/migrations
-          command: ./workdir/contacts
-          background: true
-
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output
