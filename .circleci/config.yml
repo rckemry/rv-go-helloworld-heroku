@@ -1,33 +1,18 @@
 machine:
-  services:
-    - docker
   environment:
-    GOPATH: /home/ubuntu/.go_workspace
-    IMPORT_PATH: github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
-
-general:
-  build_dir: ../.go_workspace/src/$IMPORT_PATH
-
-checkout:
-  post:
-    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
-    - rsync -azC --delete $HOME/$CIRCLE_PROJECT_REPONAME/ $GOPATH/src/$IMPORT_PATH/
+    IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
 
 dependencies:
   pre:
-    - go get github.com/tools/godep # if using godep to manage dependencies
+    - go get github.com/tools/godep
+
   override:
-    - godep restore # if using godep to manage dependencies
+    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
 
 test:
-  override:
-    - go test
+  pre:
+    - go vet ./...
 
-deployment:
-  prod:
-    branch: master
-    commands:
-      - heroku plugins:install heroku-container-registry
-      - heroku container:login
-      - CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o artifact .
-      - heroku container:push web --app name-of-heroku-app
+  override:
+    - godep go test ./...
