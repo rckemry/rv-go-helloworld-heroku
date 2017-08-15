@@ -1,5 +1,5 @@
-GOFILES = $(shell find . -name '*.go' -not -path './*')
-GOPACKAGES = $(shell go list ./...  | grep -v /)
+GOFILES = $(shell find . -name '*.go' -not -path './rv-go-helloworld-heroku/*')
+GOPACKAGES = $(shell go list ./...  | grep -v /rv-go-helloworld-heroku/)
 
 default: build
 
