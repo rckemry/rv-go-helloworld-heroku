@@ -13,6 +13,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
     http.HandleFunc("/", handler)
-    log.Fatal(http.ListenAndServe(":" + os.Getenv("PORT"), nil))
+    http.ListenAndServe(":" + os.Getenv("PORT"), nil)
 
 }
