@@ -1,4 +1,4 @@
-GOFILES = $(shell find . -name '*.go' -not -path 'main.go')
+GOFILES = main.go
 
 default: build
 
